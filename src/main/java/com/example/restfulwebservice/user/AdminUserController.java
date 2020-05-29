@@ -22,7 +22,7 @@ public class AdminUserController {
     private final UserDaoService service;
 
     @GetMapping("/users")
-    public MappingJacksonValue retrieveAllUsers()  {
+    public MappingJacksonValue retrieveAllUsers() {
         List<User> users = service.findAll();
 
         SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter
@@ -37,7 +37,10 @@ public class AdminUserController {
     }
 
     // GET /admin/users/1 or /admin/v1/users/10  -> String
-    @GetMapping("/v1/users/{id}")
+//    @GetMapping("/v1/users/{id}")
+//    @GetMapping(value = "/user/{id}/", params = "version=1")
+//    @GetMapping(value = "/users/{id}", headers = "X-API-VERSION=1")
+    @GetMapping(value =  "/users/{id}", produces = "application/vnd.company.appv1+json")
     public MappingJacksonValue retrieveUserV1(@PathVariable int id) {
         User user = service.findOne(id);
         if (user == null) {
@@ -55,7 +58,10 @@ public class AdminUserController {
         return mapping;
     }
 
-    @GetMapping("/v2/users/{id}")
+    //    @GetMapping("/v2/users/{id}")
+//    @GetMapping(value = "/user/{id}/", params = "version=2")
+//    @GetMapping(value = "/users/{id}", headers = "X-API-VERSION=2")
+    @GetMapping(value =  "/users/{id}", produces = "application/vnd.company.appv2+json")
     public MappingJacksonValue retrieveUserV2(@PathVariable int id) {
         User user = service.findOne(id);
 
