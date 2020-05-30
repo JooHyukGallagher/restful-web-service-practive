@@ -2,6 +2,7 @@ package com.example.restfulwebservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.hateoas.client.LinkDiscoverer;
 import org.springframework.hateoas.client.LinkDiscoverers;
 import org.springframework.hateoas.mediatype.collectionjson.CollectionJsonLinkDiscoverer;
@@ -36,6 +37,7 @@ public class SwaggerConfig {
                 .consumes(DEFAULT_PRODUCES_AND_CONSUMES);
     }
 
+    @Primary
     @Bean
     public LinkDiscoverers discoverers() {
         List<LinkDiscoverer> plugins = new ArrayList<>();
